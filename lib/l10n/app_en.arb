@@ -1,0 +1,22 @@
+{
+  "appTitle": "My Notes",
+  "welcome": "Welcome to My Notes",
+  "yourNotes": "Your Notes",
+  "newNote": "New Note",
+  "searchNotes": "Search your notes...",
+  "noNotes": "No notes yet",
+  "createFirstNote": "Create your first note to get started.",
+  "settings": "Settings",
+  "language": "Language",
+  "theme": "Theme",
+  "lightMode": "Light Mode",
+  "darkMode": "Dark Mode",
+  "logout": "Log out",
+  "refresh": "Refresh",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "edit": "Edit",
+  "save": "Save",
+  "title": "Title",
+  "content": "Content"
+}
