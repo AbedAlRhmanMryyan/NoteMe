@@ -1,6 +1,6 @@
+
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-import 'home_screen.dart';
 import '../services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -39,20 +39,23 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (success) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-          (route) => false,
-        );
+        // Return to main.dart.
+        // Its FutureBuilder will detect the saved token
+        // and display HomeScreen with the current settings.
+        Navigator.of(context).popUntil((route) => route.isFirst);
       } else {
-        _showMessage('Login failed. Check your username and password.');
+        _showMessage(
+          'Login failed. Check your username and password.',
+        );
       }
     } catch (e) {
       if (mounted) {
         _showMessage('Unable to log in. Please try again.');
       }
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -77,20 +80,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Icon(
                     Icons.note_alt_rounded,
                     size: 76,
-                    color: Colors.deepPurple,
                   ),
+
                   const SizedBox(height: 16),
+
                   Text(
                     'Welcome Back',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context)
+                        .textTheme.headlineMedium,
                   ),
+
                   const SizedBox(height: 8),
+
                   const Text(
                     'Sign in to access your notes',
                     textAlign: TextAlign.center,
                   ),
+
                   const SizedBox(height: 32),
+
                   TextFormField(
                     controller: _usernameController,
                     decoration: const InputDecoration(
@@ -100,19 +109,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     textInputAction: TextInputAction.next,
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                      if (value == null ||
+                          value.trim().isEmpty) {
                         return 'Enter your username';
                       }
                       return null;
                     },
                   ),
+
                   const SizedBox(height: 16),
+
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _hidePassword,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: const Icon(Icons.lock_outline),
+                      prefixIcon:
+                          const Icon(Icons.lock_outline),
                       border: const OutlineInputBorder(),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -121,7 +134,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icons.visibility_off,
                         ),
                         onPressed: () {
-                          setState(() => _hidePassword = !_hidePassword);
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
                         },
                       ),
                     ),
@@ -134,18 +149,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
+
                   const SizedBox(height: 24),
+
                   FilledButton(
                     onPressed: _isLoading ? null : _login,
                     child: _isLoading
                         ? const SizedBox(
                             height: 20,
                             width: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
                           )
                         : const Text('Login'),
                   ),
+
                   const SizedBox(height: 12),
+
                   TextButton(
                     onPressed: _isLoading
                         ? null
@@ -153,11 +174,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => const RegisterScreen(),
+                                builder: (_) =>
+                                    const RegisterScreen(),
                               ),
                             );
                           },
-                    child: const Text("Don't have an account? Register"),
+                    child: const Text(
+                      "Don't have an account? Register",
+                    ),
                   ),
                 ],
               ),
