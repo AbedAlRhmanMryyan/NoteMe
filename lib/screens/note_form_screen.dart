@@ -84,8 +84,8 @@ class _NoteFormScreenState extends State<NoteFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_isEditing ? 'Edit Note' : 'New Note'),
+      appBar: AppBar(backgroundColor: Color(0xFF2292A4),
+        title: Text(_isEditing ? 'Edit Note' : 'New Note',style:  TextStyle(color: Colors.white),),
         actions: [
           IconButton(
             tooltip: 'Save note',

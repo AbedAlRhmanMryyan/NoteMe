@@ -67,7 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Create Account')),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF2292A4),
+        title: const Text('Create Account',style: TextStyle(color:Colors.white),)),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -79,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const Icon(
                   Icons.person_add_alt_1,
                   size: 64,
-                  color: Colors.deepPurple,
+                  color:Color(0xFF2292A4),
                 ),
                 const SizedBox(height: 24),
                 TextFormField(

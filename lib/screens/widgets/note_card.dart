@@ -41,7 +41,7 @@ class NoteCard extends StatelessWidget {
               if (note.createdAt.isNotEmpty) ...[
                 const SizedBox(height: 8),
                 Text(
-                  note.createdAt,
+                  note.createdAt.substring(0,10),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

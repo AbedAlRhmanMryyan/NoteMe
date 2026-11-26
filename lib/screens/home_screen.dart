@@ -195,19 +195,17 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(
             'Your personal workspace',
-            style: Theme.of(context).textTheme.titleMedium,
+            style:TextStyle(color: Colors.white)
           ),
           const SizedBox(height: 8),
           Text(
             'Welcome to My Notes',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style:TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:30)
           ),
           const SizedBox(height: 8),
           Text(
             'Keep your thoughts and ideas organized in one place.',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: TextStyle(color: Colors.white,fontSize: 15)
           ),
           const SizedBox(height: 20),
           Row(
@@ -216,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(width: 8),
               Text(
                 '${_notes.length} ${_notes.length == 1 ? 'note' : 'notes'}',
-                style: const TextStyle(
+                style: const TextStyle(color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -351,9 +349,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF2292A4),
         title: const Text(
-          'My Notes',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          'NoteMe',
+          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
         ),
         actions: [
           IconButton(

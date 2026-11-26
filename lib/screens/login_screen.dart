@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Icon(
                     Icons.note_alt_rounded,
                     size: 76,
-                    color: Colors.deepPurple,
+                    color: Color(0xFF2292A4),
                   ),
                   const SizedBox(height: 16),
                   Text(
