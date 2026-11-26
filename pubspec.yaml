@@ -105,5 +105,11 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
+  web:
+    generate: true
+    image_path: "lib/assets/images/NoteMe.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
   image_path: "lib/assets/images/NoteMe.png"
   min_sdk_android: 21
+  remove_alpha_ios: true
