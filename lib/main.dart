@@ -1,18 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
-
+import 'package:flutter_application_1/screens/note_form_screen.dart';
+import 'package:flutter_application_1/screens/register_screen.dart';
 import 'config/app_theme.dart';
 import 'services/auth_service.dart';
 import 'l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
   runApp(const NotesApp());
 }
-
 class NotesApp extends StatelessWidget {
   const NotesApp({super.key});
 
@@ -21,12 +23,10 @@ class NotesApp extends StatelessWidget {
     return const MyApp();
   }
 }
-
-Future<bool> _isLoggedIn() async {
-  final token = await AuthService.getToken();
-  return token != null && token.isNotEmpty;
-}
-
+  Future<bool> _isLoggedIn() async {
+    final token = await AuthService.getToken();
+    return token != null && token.isNotEmpty;
+  }
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -44,9 +44,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void changeTheme(bool isDark) {
+  void changeTheme(ThemeMode mode) {
     setState(() {
-      _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+      _themeMode = mode;
     });
   }
 
@@ -57,7 +57,6 @@ class _MyAppState extends State<MyApp> {
       title: 'My Notes',
 
       locale: _locale,
-
       supportedLocales: const [
         Locale('en'),
         Locale('ar'),
@@ -74,27 +73,18 @@ class _MyAppState extends State<MyApp> {
       darkTheme: AppTheme.darkTheme,
       themeMode: _themeMode,
 
-      home: FutureBuilder<bool>(
+      home:  FutureBuilder<bool>(
         future: _isLoggedIn(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
+              body: Center(child: CircularProgressIndicator()),
             );
           }
 
-          if (snapshot.data == true) {
-            return HomeScreen(
-              isDarkMode: _themeMode == ThemeMode.dark,
-              onThemeChanged: changeTheme,
-              locale: _locale,
-              onLocaleChanged: changeLanguage,
-            );
-          }
-
-          return const LoginScreen();
+          return snapshot.data == true
+              ? const HomeScreen()
+              : const LoginScreen();
         },
       ),
     );
